@@ -1,11 +1,11 @@
-package com.javaconfigremove;
+package com.progWithoutXML;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@ComponentScan(basePackages = "com.javaconfigremove")
+@ComponentScan(basePackages = "com.progWithoutXML")
 public class JavaConfig {
 	
 	@Bean

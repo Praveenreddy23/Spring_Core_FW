@@ -1,4 +1,4 @@
-package com.javaconfigremove;
+package com.progWithoutXML;
 
 
 
