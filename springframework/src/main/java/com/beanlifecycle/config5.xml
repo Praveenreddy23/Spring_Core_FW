@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xmlns:context="http://www.springframework.org/schema/context"
+ xmlns:p="http://www.springframework.org/schema/p"
+ 
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context.xsd">
+
+<context:annotation-config/> <!-- It will enable all the annotation in spring framework -->
+
+<!-- This config using xml  
+<bean class="com.beanlifecycle.Course" name="course" p:subName="Spring" p:subDuration="1 Month"
+  init-method="init" destroy-method="destroy" />\
+  
+     This config using interface
+<bean class="com.beanlifecycle.Pepsi" name="psp" p:prize="20.10"></bean>-->
+
+<bean class="com.beanlifecycle.Example" name="ex" p:subject="Spring"></bean>
+</beans>

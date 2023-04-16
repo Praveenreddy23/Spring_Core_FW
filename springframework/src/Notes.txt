@@ -1,0 +1,499 @@
+               -:SpringFramework:-
+==] SPRING:
+ --> Spring is a lightweight framework.
+ --> Spring is a DEPENDENCY INJECTION framework to make java application loosely coupled(easily modified).
+ --> Spring framework makes the easy development of JavaEE (JEE) application.
+ --> It supports Struts, Hibernate, Tapestry, EJB, JSF,etc.
+ --> It was developed by ROD JOHNSON in 2003.
+
+==] Features of Spring Framework:-
+ --> It is a Dependency injection framework.
+ --> It is powerful abstraction framework.
+ --> It will provide more security for web application.
+ --> Spring an inject any number of dependencies.
+
+
+==] DEPENDENCY INJECTION:-(Design pattern)
+ --> DEPENDENCIES nothing but DATA MEMBER.
+ --> DI is the process of injecting the dependencies is called dependency injection.
+ --> Dependency injection is a technique in which an object receives other objects that it depends on.
+   EG:
+      class Rama                                      class Sita
+      {                                               {
+      Sita ob;                                          public void doWork()
+                                                          {
+      public void doWork()
+      {                                                   }
+      }
+                                                      }
+      }
+
+ --> DEPENDENCY INJECTION is design patterns that are used to remove dependency from the programming code.
+ --> They make the code easier to test and maintain.
+
+==] Type of dependencies:-
+     1) Primitive dependency -> 8 Type with String
+     2) Collection dependency -> List, Set, Map
+     3) Reference type dependency -> Has a relation
+
+
+==] Layer of JEE Application:-
+ -->                SPRING AND JEE
+
+   Strut/ JSF Spring MVC   <->     Presentation Layer                ->     ProductController
+                                            |                                              >inject
+   Security                                 |
+   Transaction             <->    Business/ServicesLayer        ->     ProductService
+   Management                               |
+                                            |                                             >inject
+   Spring JDBC             <->      Data Access Layer           ->     ProductDao
+   Spring ORM                               |
+                                            DB
+
+
+ ==] IOC (INVERSION OF CONTROL):-
+  --> Inversion of control is a pattern used for decoupling components and layers in the system.
+   -> The pattern is implemented through injecting dependencies into a component when it is constructed.
+
+  --> Inversion of control is a process where spring framework will inject one object into another object
+   -> And it will be done automatically by spring framework at runtime dynamically.
+
+  --> Thus IOC makes the code loosely coupled. in such case,
+       there is no need to modify the code if our logic is moved to a new environment.
+   -> In the spring framework, IOC containers responsible for injecting dependency.
+
+   --> Advantages of Dependency Injection:
+     1) Makes the code loosely coupled so easy to maintain
+     2) Makes the code easy  to test
+
+ ==] IOC CONTAINER:-
+  --> The spring container is the core of spring framework.
+   -> The container, use for creating the objects and configuring them.
+  --> Spring IOC container are used for managing the complete lifecycle from creation to its destruction.
+  --> It uses Dependency Injection(DI) to manage components and these objects are called SPRING BEANS.
+
+  =] Types of IOC Container in spring:-
+   -> These are the two types of spring IOC containers:-
+     1)Spring BeanFactory Container
+     2)Spring ApplicationContext Container
+
+   1) Spring BeanFactory Container:-
+     -> Spring BeanFactory Container is the simplest container which provides basic supports for DI.
+     -> It is defined by org.springframework.beans.factory.BeanFactory interface.
+
+   2) Spring ApplicationContext Container:-
+     -> The AC container is springs advanced container.
+     -> It is defined by org.springframework.context.ApplicationContext interface.
+     -> The AC container has the all the functionalities of BeanFactory.
+     -> It is generally recommended over BeanFactory.
+     -> Since this is an interface we can not create objects,
+         so implementation classes will be used to access the functionality.
+
+        -> ApplicationContext(i)
+               - FileSystemXmlApplicationContext
+                - AnnotationConfigApplicationContext
+                 - ClassPathXmlApplicationContext
+                  - WebXmlApplicationContext
+
+
+ ==] MAVEN :-
+   -> Maven is a project management tool/ project building tool which is used to build the project.
+   -> The project created using maven tool is called maven project.
+
+ ==] The following maven dependencies are used in spring IOC:-
+     1) Spring core
+     2) Spring Context
+
+    Note: Both version should be same.
+
+ ==] Step to work with Spring Framework:-
+    1) Create a bean/pojo class:-
+      -> Declare the dependencies using private keyword.
+    2) Create spring configuration file:-
+      -> Configure the spring  configuration file using beans files (<beans></beans>)
+      -> Create object for the bean class using bean tag
+          Syntax :
+          < bean class = " fullyQualifiedClassName of bean class" name = " ref variable"> </bean>
+      -> inject the dependencies within the bean object
+    3) Create test-dependent class:-
+
+
+ ==] Different Ways Of Injecting Dependency:-
+    1) Setter Dependency injection (SDI)
+    2) Constructor Dependency injection (CDI)
+    3) Interface Dependency injection (IDI)
+       -> Note: Spring does not support interface injection.
+         Reason 1: Object can not be created for an interface.
+         Reason 2: Without creating object dependencies can not be injected in spring configuration file.
+
+   1) Setter Dependency injection (SDI):-
+     -> It is type of dependency injection where setter method is used to inject the dependencies
+     -> property tag is used to inject the dependencies in setter injection
+
+    --> Configuration of Primitive dependencies in setter injection:-
+       -> There are 3 ways to inject primitive dependencies in setter DI
+            1) value as element
+            2) value as attributes
+            3) value using p-schema (p-property)
+
+          1) value as element:-
+             Syntax:
+               < bean class = " fullyQualifiedClassName of bean class" name = " ref variable">
+                <property name = " dependencies name">  // dependencies name means data member
+                    <value> value </value>
+                 </property>
+                 </bean>
+
+             Example:
+                    <bean class = "com.springcore.Student" name = "students">
+                      <property name="id">
+                      <value>23</value>
+                      </property>
+
+                      <property name="name">
+                      <value>Reddy</value>
+                      </property>
+
+                      <property name="marks">
+                      <value>90.23</value>
+                      </property>
+                    </bean>
+
+          2) value as attributes:-
+             Syntax:
+                  <property name = "dependencies name" value = "value">
+                  </property>
+
+                -> Self closing way of tags in xml file
+                   <property name = "dependencies name" value = "value" />
+
+          3) value using p-schema:-
+             Syntax:
+
+             Example:
+             <!-- By Using p-schema -->
+             <bean class="com.springframework.Student" name=" student" p:sid="32" p:name="Praveen" p:marks="92.0"/>
+
+             <!-- <bean class = "com.springframework.Student" name="student1">
+              By Using value tag
+             <property name="sid"><value>23</value></property>
+             <property name="name"><value>Reddy</value></property>
+             <property name="marks"><value>99.23</value></property>
+
+              // By Using value Attribute
+             <property name="sid" value="123"/>
+             <property name="name" value="da"/>
+             <property name="marks" value="90.20"/>
+
+             </bean>-->
+
+     --> Configuration of Collection:-
+         -> Type dependencies in setter injection:
+           1) List ->Type
+              -> Whenever Collection type dependency is injected using list interface then,
+                 spring container will create object for the class " Arraylist"
+              Syntax:
+              <bean>
+                 <property name = " dependency_name">
+                  <list>
+                   <value> values </value>
+                   <value> values </value>
+                                    .......
+                  </list>
+                 </property>
+              </bean>
+
+           2) Set - Type
+              -> Whenever collection type dependency is injected using "set" interface then,
+                  spring container will create object for the class "LinkedHashSet"
+               Syntax:
+               <bean>
+                  <property name = " dependency_name">
+                      <Set>
+                         <value> values </value>
+                         <value> values </value>
+                                             .......
+                      </Set>
+                  </property>
+               </bean>
+
+           3) Map - Type
+              -> Whenever collection type dependency is injected using "Map" interface then,
+                   spring container will create object for the class "LinkedHashMap"
+
+               -> entry tag (<entry> </entry>) is used to inject map type dependency in the
+                   from of key and value (key == value).
+
+                Syntax:
+                <bean>
+                     <property name = " dependency_name">
+                       <map>
+                         <entry key=" " value=" "/>
+                         <entry key=" " value=" "/>
+                                            .......
+                       </map>
+                     </property>
+                </bean>
+
+           4) Property - Type
+               Syntax:
+                  <bean>
+                     <property name = " dependency_name".
+                          <props>
+                            <props key=" "> values </props>
+                            <props key=" "> values </props>
+                                                   .......
+                          <props>
+                     </property>
+                  </bean>
+
+           Example:
+                <bean class = "com.springframework.Emp" name="emp">
+                <property name="vehicle">
+                <list>
+                <value>BMW</value>
+                <value>AUDI</value>
+                <value>TATA</value>
+                <value>Maruthi</value>
+                </list>
+                </property>
+
+                <property name="email">
+                <set>
+                <value>123@gmail.com</value>
+                <value>132@gmail.com</value>
+                <value>1dsd@gmail.com</value>
+                </set>
+                </property>
+
+                <property name="name">
+                <map>
+                <entry key="reddy" value="praveen"/>
+                <entry key="Praveen" value="Reddy"/>
+                <entry key="reddy" value="Da"/>
+                </map></property>
+                </bean>
+
+     --> Configuration of reference - type dependency in setter injection:
+         Syntax:
+              <bean name=" ref_variable" class=" FullyQualifiedClassName of outer bean class Object">
+              <property name ="ref_type dependency name" value=" "/>
+              </bean>
+              <bean name="ref_var" class = "FullyQualifiedClassName of inner bean class Object"/>
+              <property name ="ref_type dependency name" value=" "/>
+              <property name ="ref_type of outer object dependency name/>
+              <ref bean="ref_name"/>
+               </bean>
+
+         Example:
+              <bean class="com.reference_type.B" name="refB">
+              <property name="y" value="10000"></property>
+              </bean>
+              <bean class="com.reference_type.A" name="refA">
+              <property name="x" value="20000"></property>
+              <property name="b"><ref bean="refB"/></property>
+              </bean>
+
+   2) Constructor Dependency injection (CDI):-
+      -> It is a type of dependency injection where constructor is used to inject the dependencies.
+      -> Constructor-arg tag (<constructor-arg>) is used to inject the dependencies in constructor injection.
+
+    --> Configuration of primitive dependencies in constructor injection:-
+       -> there are 3 ways to inject primitive dependencies:
+           1)value as element
+           2)value as attribute
+           3)value using c-schema (c- constructor)
+
+         1) value as element:
+            <constructor-arg>
+            <value> values </value>
+            </constructor-arg>
+
+         2) value as attribute:
+           <constructor-arg value="values" />
+
+         3) value using c-schema:
+           <bean name ="ref_var" class="FQCN of bean class" c:dependency_name="values" />
+
+   3) Interface Dependency injection (IDI):
+     --> It is a type of dependency injection where interface is used to inject the dependencies.
+
+       Steps:
+            1) Create an interface
+            2) Create implementation class
+            3) Create a bean/pojo class
+            4) Create spring configuration file
+            5) Create test-dependent class
+
+  -->  StereoType Annotations:
+        1) @Component:
+            -> It is class-level annotation which is used to create object of the class.
+
+        --> @value:
+            -> It is a data member level annotation which is used to inject the primitive dependency.
+            Syntax: @value("values")
+         Ex:
+            @Component("ipl-2023")
+            public class Ipl {
+            	@Value("CSK")
+            	private String teamName;
+            	@Value("MS Dhoni")
+            	private String captainName;
+
+        --> <context:component-scan> :
+                   -> It will scan all the file present in the package mentioned within base-package attribute.
+                   -> It also carry the object of class whichever class is assigned with either @Bean, @Component etc..
+
+                   Syntax:
+                       <context:component-scan base-package="package_name"/>
+              Ex:
+                 <context:component-scan base-package="com.stereotype"/>
+
+
+        2) @Autowired:
+            -> It is used with reference-type dependency
+            -> It is also used to store the object of implementation class within ref-type dependency
+               it only one implementation class object is created
+
+        3) @Qualifier:
+            -> It is used to store the particular implementation class object within ref-type dependency
+               Whenever multiple implementation class object are created.
+
+
+
+
+ ==] Spring Bean Life Cycle:
+    --> Spring life cycle is managed by the SpringContainer.
+    --> SpringContainer is the core of the spring framework.
+    --> SpringContainer will get started when we run the program.
+    --> SpringContainer will create instance of bean(object)
+         and then it will inject the dependencies within instance of bean.
+
+    --> init()-> It is used to initialize the bean object
+      -> init() method is called implicitly by SpringContainer to initialize the bean object.
+      -> Programmer can also call the init() explicitly by using "init-method" attribute.
+      -> init() is called after injecting the dependencies.
+        Syntax:
+             public void init()
+
+    --> destroy()-> It is used to destroy the bean object.
+      -> destroy() is called explicitly by programmer by using "destroy-method" attribute.
+      -> destroy() is called before closing the JVH.
+        Syntax:
+            public void destroy()
+
+      Note: We can choose a custom method name instead of init() and destroy() But, method signature remain same.
+
+  --> Life cycle of Bean can be configured in 3 Ways:
+       1) XML file   (use registerShutdownHook();)
+            Example:
+                     <bean class="com.beanlifecycle.Course" name="course" p:subName="Spring" p:subDuration="1 Month"
+                       init-method="init" destroy-method="destroy" />
+       2) Spring Interface  (use registerShutdownHook();)
+            Example:
+                     public class Pepsi implements InitializingBean, DisposableBean{
+                     public void afterPropertiesSet() throws Exception {
+                     		System.out.println("It also init()");}
+                     	public void destroy() throws Exception {
+                     		System.out.println("It also destroy()");} }
+       3) Annotation (use registerShutdownHook();)
+            Example:
+                     @PostConstruct
+                     	public void start() {
+                     		System.out.println("Starting ");}
+                     @PreDestroy
+                     	public void end() {
+                     		System.out.println("Ending");}
+
+ ==] Scope of Bean:
+   -> While declaring the bean, user can even specify the scope of it.
+   -> Scope can be specified in to 2 Ways:
+      1) Using Scope:
+         <bean class=" " name=" " scope="Type"/>
+         Ex:
+         <bean class="com.stereotype " name="names " scope="Singleton"/>
+      2) Using Annotation:
+         @Scope("Type")
+         Ex:
+          @Component("ipl-2023")
+          @Scope("prototype")
+          public class Student {}
+
+    --> Types: singleton, prototype, request, session, global-session.
+              -> singleton:
+                   -> This scopes the bean definition to a single instance per spring IOC container (default).
+              -> prototype:
+                   -> This scopes a single bean definition to have any number of object instance.
+              -> request:
+                   -> This scopes a bean definition to an HTTP request.
+                       Only valid in the context of a web-aware Spring ApplicationContext.
+              -> session:
+                   -> This scopes a bean definition to an HTTP session.
+                       Only valid in the context of a web-aware Spring ApplicationContext.
+              -> global-session:
+                   -> This scopes a bean definition to an global HTTP session.
+                        Only valid in the context of a web-aware Spring ApplicationContext.
+
+ ==] Spring Expression Language(SpEL):
+    --> The spring expression language is a powerful expression language that
+         supports querying and manipulating an object graph at runtime.
+    --> It supports parsing and executing expression with the help of @Value annotation.
+    Syntax:
+             @Value("#{ expressions }")
+           expressions can be:
+           --> @Value("#{ 10+2 }")       -->  12 will be injected.
+           --> @Value("#{ 99>88?8.5:9.5 }")  -->  8 will be injected.
+                                       etc...
+         Ex:
+             @Component("Bean1")
+             public class Spel {
+             	@Value("#{ 10+2 }")
+             	private int a;
+             	@Value("#{ 99>88?8.5:9.5 }")
+             	private double b;
+             	@Override
+             	public String toString() {
+             		return "Spel [a=" + a + ", b=" + b + "]";
+             	}
+
+    --> The expression language supports the following functionality such as:
+        -> Literal expression
+        -> Boolean and relational expression
+        -> Accessing properties, Arrays, List, Maps.
+        -> Method invocation
+        -> Relational operators
+        -> Assignment
+        -> Calling constructors etc...
+
+    --> Invoking Static Method or Member or Object Creation:
+       Syntax:
+               T(FQCN).methodName(Parameter);
+                   Eg:
+                       @Value("#{T(java.lang.Math).sqrt(30)}")
+                       	private double power;
+
+               T(FQCN).variableName;
+                   Eg:
+                       @Value("#{T(java.lang.Math).PI}")
+                       	private double staticVariable;
+               new ObjectName(Value);
+                   Eg:
+                       @Value("#{new java.lang.String ('Reddy')}")
+                       	private String stringTypeObjectValue;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
