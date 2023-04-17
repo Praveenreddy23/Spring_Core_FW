@@ -1,0 +1,11 @@
+
+
+ ==]  Spring  Interceptor
+   --> Simply put, a Spring interceptor is a class that either extends the HandlerInterceptorAdapter class or implements the HandlerInterceptor interface.
+
+   --> The HandlerInterceptor contains three main methods:
+
+         1) prehandle() – called before the execution of the actual handler
+         2) postHandle() – called after the handler is executed
+         3) afterCompletion() – called after the complete request is finished and the view is generated
+            These three methods provide flexibility to do all kinds of pre- and post-processing.
