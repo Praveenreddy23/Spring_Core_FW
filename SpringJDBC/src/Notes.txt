@@ -1,0 +1,90 @@
+    -->JDBC SPRING MODULE<--
+ ==] Why Spring JDBC required?
+ --> The Problems of JDBC API are as follows:
+   -> We need to write a lot of code before and after executing the query,such as creating connection,
+      - Statement, Closing resultSet, connection etc..
+   -> We need to perform exception handling code on the database logic.
+   -> We need to handle Transactions.
+   -> Repetition of all these codes from one to another database logic is a time-consuming task.
+
+ ==] Advantage of Spring JdbcTemplate:
+   -> Spring JdbcTemplate eliminates all the above-mentioned problems of JDBC API.
+   -> It provides you methods to write the queries directly, so it saves a lot of work and time.
+
+ ==] JdbcTemplate class:
+   -> It is the central class in the Spring JDBC supports classes.
+   -> It takes care of creation and release of resources such as creating and closing of connection objects etc..
+      - So it will not lead to any problem if you forget to close the connection.
+   -> It handles the exception and provides the informative exception messages by the help of exception classes defined in the
+      - org.springframework.dao package.
+   -> We can perform all the database operations by the help of JdbcTemplate class such as (CRUD OPERATIONS) insertion,updation,deletion
+    - and retrieval of the data from the database.
+
+ ==] DataSource:
+   -> It is an interface.
+   -> A DataSource is a factory for connections to any physical data source.
+
+         JdbcTemplate(C)                        ->        DataSource(I)
+              |                                                |
+       contains method such as                      DriverManagerDataSource(c)
+       insert,delete,update etc..                   - DriverClassName->
+                                                    - url->
+                                                    - user_name->
+                                                    - password->
+      Ex:
+        --> (IN XML FILE)
+          <bean class="org.springframework.jdbc.datasource.DriverManagerDataSource" name="ds">
+                <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/springjdbc"/>
+                <property name="username" value="root"/>
+                <property name="password" value="805026"/>
+            </bean>
+
+        --> (WITHOUT XML FILE)
+              @Bean("ds")
+              public DriverManagerDataSource getDatasource(){
+                  DriverManagerDataSource ds = new DriverManagerDataSource();
+                  ds.setDriverClassName("com.mysql.cj.jdbc.Driver");
+                  ds.setUrl("jdbc:mysql://localhost:3306/springjdbc");
+                  ds.setUsername("root");
+                  ds.setPassword("805026");
+                  return ds; }
+ ==] Fetching/Reading the Data:
+   1) To Fetch Single Row or Object:
+   -> public T queryForObject(String sql, RowMapper<T> rowMapper, Object args)
+     Ex:
+         public Student getStudent(int studentId) {
+        //        selecting single student data
+                String query = "select * from student where id=?";
+                RowMapper<Student> rowMapper = new RowMapperImpl();
+              Student student = this.template.queryForObject(query, rowMapper ,studentId);
+                return student;
+            }
+
+   2) TO Fetch Multiple Row or Object:
+   -> public List<T>query( String sql, RowMapper<T> rowMapper)
+     EX:
+       public List<Student> getAllStudents() {
+       //        selecting multiple student data
+               String query = "select * from student";
+               List<Student> res = this.template.query(query,new RowMapperImpl());
+               return res;
+           }
+
+     NOTES: Where T means Object.
+  --> Example
+           public class RowMapperImpl implements RowMapper<Student> {
+               public Student mapRow(ResultSet rs, int rowNum) throws SQLException {
+                   Student student = new Student();
+                   student.setId(rs.getInt(1));
+                   student.setName(rs.getString(2));
+                   student.setCity(rs.getString(3));
+                   return student;
+               }
+           }
+
+ ==] RowMapper:
+    -> An interface used by JdbcTemplate for mapping rows of ResultSet on a per-rows basis.
+    -> Implementations of this interface perform the actual work of mapping each row to a result object,
+       - but do not need to worry about exception handling.
+    -> In other words row mapper converts resultset to object.s
